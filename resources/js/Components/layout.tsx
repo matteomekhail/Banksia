@@ -4,6 +4,7 @@ import { Menu, HoveredLink } from './ui/navbar-menu';
 import { FaInstagram } from 'react-icons/fa';
 import { HiMenu } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
+import Footer from './footer';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const [active, setActive] = useState<string | null>(null);
@@ -80,6 +81,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <main className="flex-grow pt-24">
                 {children}
             </main>
+            <Footer />
+
         </div>
     );
 };

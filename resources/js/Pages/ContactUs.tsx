@@ -9,7 +9,7 @@ export default function Welcome() {
     return (
         <>
             <Layout>
-                <Footer />
+                <div></div>
             </Layout>
         </>
     );

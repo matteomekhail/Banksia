@@ -25,7 +25,6 @@ export default function Welcome({ instagramAccessToken }: WelcomeProps) {
                     instagramUsername='Banksiacafe'
                 />
                 <AppleCardsCarouselDemo />
-                <Footer />
             </Layout>
         </>
     );
