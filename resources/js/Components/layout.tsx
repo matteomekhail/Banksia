@@ -38,7 +38,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <SparklesCore
                 id="tsparticlesfullpage"
                 background="transparent"
-                minSize={0.2}
+                minSize={0.4}
                 maxSize={0.8}
                 particleDensity={100}
                 className="w-full h-full absolute top-0 left-0 pointer-events-none"

@@ -652,10 +652,12 @@ const RestaurantMenu: React.FC = () => {
     }
     const categories = Object.keys(menuData);
     const [categoryIndex, setCategoryIndex] = useState(0);
+    const [direction, setDirection] = useState(0);
 
-    const navigate = (direction: number) => {
+    const navigate = (newDirection: number) => {
+        setDirection(newDirection);
         setCategoryIndex((prevIndex) => {
-            let newIndex = prevIndex + direction;
+            let newIndex = prevIndex + newDirection;
             if (newIndex < 0) newIndex = categories.length - 1;
             if (newIndex >= categories.length) newIndex = 0;
             return newIndex;
@@ -664,19 +666,19 @@ const RestaurantMenu: React.FC = () => {
 
     const currentCategory = categories[categoryIndex];
 
-    const variants: Variants = {
-        enter: {
+    const variants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? 1000 : -1000,
             opacity: 0,
-            scale: 0.8,
-        },
+        }),
         center: {
+            x: 0,
             opacity: 1,
-            scale: 1,
         },
-        exit: {
+        exit: (direction: number) => ({
+            x: direction < 0 ? 1000 : -1000,
             opacity: 0,
-            scale: 1.2,
-        }
+        }),
     };
 
     return (
@@ -693,47 +695,45 @@ const RestaurantMenu: React.FC = () => {
                     <ChevronRight className="h-6 w-6" />
                 </button>
             </div>
-            <div className="relative overflow-hidden" style={{ minHeight: '500px' }}>
-                <AnimatePresence initial={false} mode="wait">
-                    <motion.div
-                        key={categoryIndex}
-                        variants={variants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{ duration: 0.3 }}
-                        className="absolute w-full"
-                    >
-                        <Card>
-                            <CardContent>
-                                {menuData[currentCategory].map((item, index) => (
-                                    <React.Fragment key={index}>
-                                        <div className="mb-4">
-                                            <div className="flex justify-between items-center">
-                                                <h4 className="text-lg font-semibold">{item.name}</h4>
-                                                {item.price !== undefined && <span className="text-lg font-bold">${item.price.toFixed(2)}</span>}
-                                                {item.prices && (
-                                                    <span className="text-lg font-bold">
-                                                        ${item.prices.small?.toFixed(2)} / ${item.prices.large?.toFixed(2)}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            {item.description && <p className="text-sm text-gray-600">{item.description}</p>}
-                                            {item.dietaryInfo && item.dietaryInfo.length > 0 && (
-                                                <p className="text-xs text-gray-500 mt-1">{item.dietaryInfo.join(', ')}</p>
-                                            )}
-                                            {item.options && item.options.length > 0 && (
-                                                <p className="text-sm text-gray-600 mt-1">Options: {item.options.join(', ')}</p>
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+                <motion.div
+                    key={categoryIndex}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.3, type: "tween" }}
+                >
+                    <Card>
+                        <CardContent>
+                            {menuData[currentCategory].map((item, index) => (
+                                <React.Fragment key={index}>
+                                    <div className="mb-4">
+                                        <div className="flex justify-between items-center">
+                                            <h4 className="text-lg font-semibold">{item.name}</h4>
+                                            {item.price !== undefined && <span className="text-lg font-bold">${item.price.toFixed(2)}</span>}
+                                            {item.prices && (
+                                                <span className="text-lg font-bold">
+                                                    ${item.prices.small?.toFixed(2)} / ${item.prices.large?.toFixed(2)}
+                                                </span>
                                             )}
                                         </div>
-                                        {index < menuData[currentCategory].length - 1 && <Separator className="my-2" />}
-                                    </React.Fragment>
-                                ))}
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-                </AnimatePresence>
-            </div>
+                                        {item.description && <p className="text-sm text-gray-600">{item.description}</p>}
+                                        {item.dietaryInfo && item.dietaryInfo.length > 0 && (
+                                            <p className="text-xs text-gray-500 mt-1">{item.dietaryInfo.join(', ')}</p>
+                                        )}
+                                        {item.options && item.options.length > 0 && (
+                                            <p className="text-sm text-gray-600 mt-1">Options: {item.options.join(', ')}</p>
+                                        )}
+                                    </div>
+                                    {index < menuData[currentCategory].length - 1 && <Separator className="my-2" />}
+                                </React.Fragment>
+                            ))}
+                        </CardContent>
+                    </Card>
+                </motion.div>
+            </AnimatePresence>
         </div>
     );
 };
