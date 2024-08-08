@@ -5,6 +5,7 @@ import { FaInstagram } from 'react-icons/fa';
 import { HiMenu } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from './footer';
+import { SparklesCore } from './ui/sparkles';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const [active, setActive] = useState<string | null>(null);
@@ -33,6 +34,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div className="flex flex-col min-h-screen">
+            {/* Sparkles effect */}
+            <SparklesCore
+                id="tsparticlesfullpage"
+                background="transparent"
+                minSize={0.2}
+                maxSize={0.8}
+                particleDensity={100}
+                className="w-full h-full absolute top-0 left-0 pointer-events-none"
+                particleColor="#43534A"
+            />
             <Menu setActive={setActive}>
                 <div className="flex items-center justify-between w-full relative">
                     {/* Menu e Contact us (visibili su desktop, nascosti su mobile) */}
@@ -78,7 +89,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </motion.div>
             </AnimatePresence>
 
-            <main className="flex-grow pt-24">
+            <main className="flex-grow pt-14">
                 {children}
             </main>
             <Footer />

@@ -3,23 +3,12 @@ import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 import { Button } from "./ui/button";
-import { SparklesCore } from "./ui/sparkles";
 
 function Hero() {
     const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
     return (
         <section className="w-full h-auto flex items-center bg-cover bg-no-repeat bg-center relative overflow-hidden">
-            {/* Sparkles effect */}
-            <SparklesCore
-                id="tsparticlesfullpage"
-                background="transparent"
-                minSize={0.2}
-                maxSize={0.8}
-                particleDensity={100}
-                className="w-full h-full absolute top-0 left-0 pointer-events-none"
-                particleColor="#43534A"
-            />
 
             <div className="container mx-auto z-10">
                 <div className="grid grid-cols-12 gap-4 items-center">
@@ -55,7 +44,7 @@ function Hero() {
                             transition={{ delay: 0.6, duration: 0.5 }}
                         >
                             <Button asChild className="bg-[#43534A] text-gray-50 hover:bg-[#43534A]/90">
-                                <Link href="#services">
+                                <Link href="/menu">
                                     View Our Menu
                                 </Link>
                             </Button>
@@ -72,7 +61,6 @@ function Hero() {
                             src="/img/pancake definitivi.png"
                             alt="Delicious pancakes"
                             className="w-auto h-1/2 object-fill"
-                            whileHover={{ scale: 1.05 }}
                             transition={{ type: "spring", stiffness: 300 }}
                         />
                     </motion.div>
