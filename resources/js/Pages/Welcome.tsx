@@ -1,5 +1,4 @@
 import Hero from '@/Components/hero';
-import Footer from '@/Components/footer';
 import { AppleCardsCarouselDemo } from '@/Components/cards';
 import Layout from '@/Components/layout';
 import InstagramGallery from '@/Components/instagram';

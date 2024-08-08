@@ -479,7 +479,7 @@ const RestaurantMenu: React.FC = () => {
                 "price": 1
             }
         ],
-        "teas": [
+        "Teas": [
             {
                 "name": "English breakfast",
                 "price": 5
@@ -509,7 +509,7 @@ const RestaurantMenu: React.FC = () => {
                 "price": 5
             }
         ],
-        "specialtyLattes": [
+        "Specialty Lattes": [
             {
                 "name": "Biscoff",
                 "prices": {
@@ -546,7 +546,7 @@ const RestaurantMenu: React.FC = () => {
                 }
             }
         ],
-        "icedDrinks": [
+        "Iced Drinks": [
             {
                 "name": "Iced Long Black",
                 "price": 7
@@ -576,7 +576,7 @@ const RestaurantMenu: React.FC = () => {
                 "price": 8
             }
         ],
-        "kidsMeals": [
+        "Kids Meals": [
             {
                 "name": "Kids Juice",
                 "price": 7.5,
@@ -627,7 +627,7 @@ const RestaurantMenu: React.FC = () => {
                 "description": "w/ strawberries & maple syrup"
             }
         ],
-        "gourmet": [
+        "Gourmet Crepes": [
             {
                 "name": "Biscoff",
                 "price": 24,
@@ -681,7 +681,7 @@ const RestaurantMenu: React.FC = () => {
 
     return (
         <div className="container mx-auto p-4 max-w-6xl">
-            <h1 className="text-5xl font-bold text-center mb-12">Banksia Cafe & Chocolate Bar</h1>
+            <h1 className="text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[#43534A] via-green-950 to-[#43534A]">Banksia Menu</h1>
             <div className="flex items-center justify-between mb-8">
                 <button onClick={() => navigate(-1)} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
                     <ChevronLeft className="h-6 w-6" />
