@@ -5,8 +5,11 @@ import Layout from '@/Components/layout';
 import InstagramGallery from '@/Components/instagram';
 import LocationSection from '@/Components/location';
 import Products from '@/Components/products';
+interface WelcomeProps {
+  instagramAccessToken: string;
+}
 
-export default function Welcome() {
+export default function Welcome({ instagramAccessToken }: WelcomeProps) {
     return (
         <>
             <Layout>
@@ -17,7 +20,7 @@ export default function Welcome() {
                     Follow us on Instagram!
                 </h1>
                 <InstagramGallery
-                    accessToken="IGQWROd2lPTGFKRTB3Q1RqOE1IWktwN2hkSm14RGozdGpNczFveDBaZAkpiVHBhYXpYV1FNSlF3MkhHdWRncWJsdmdqV2ZAaZAjRqLXNRZADFWNzE1NzhTc2tGVGd1U1pRSDBEVzJ3X1pTaWZA1aUYybUVJMkc5cDBOMEUZD"
+                    accessToken={instagramAccessToken}
                     limit={12}
                     instagramUsername='Banksiacafe'
                 />

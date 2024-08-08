@@ -5,7 +5,9 @@ use Inertia\Inertia;
 use App\Http\Controllers\EmailController;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('Welcome', [
+        'instagramAccessToken' => env('INSTAGRAM_ACCESS_TOKEN'),
+    ]);
 });
 
 Route::get('/contact', function () {
