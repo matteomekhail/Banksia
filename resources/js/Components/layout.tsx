@@ -71,8 +71,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     className="md:hidden bg-[#43534A] overflow-hidden"
                 >
                     <div className="p-4 flex flex-col space-y-4">
-                        <HoveredLink href="/products" className="text-white">Menu</HoveredLink>
-                        <HoveredLink href="/contact" className="text-white">Contact us</HoveredLink>
+                        <HoveredLink href="/menu" className="text-white">MENU</HoveredLink>
+                        <HoveredLink href="/contact" className="text-white">CONTACT US</HoveredLink>
                     </div>
                 </motion.div>
             </AnimatePresence>
