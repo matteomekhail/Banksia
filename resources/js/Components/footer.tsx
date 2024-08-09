@@ -7,13 +7,28 @@ import Link from "next/link"
 
 export default function Footer() {
     return (
-        <footer className="bg-[#43534A] p-6 md:py-12 w-full ">
-            <div className="container max-w-7xl flex gap-4 text-sm md:flex-row ">
-                <p className="text-white dark:text-gray-400">© {new Date().getFullYear()} Developed and Designed by:</p>
-                <div>
-                    <Link className="text-blue-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50" href="https://matteomekhail.dev">
-                        <p> Matteo Mekhail</p>
-                    </Link>
+        <footer className="bg-[#43534A] py-6 w-full">
+            <div className="container mx-auto w-full max-w-screen-xl px-4">
+                <div className="flex flex-wrap justify-between items-center mb-4">
+                    <div>
+                        <h2 className="text-sm font-semibold uppercase text-white">Banksia</h2>
+                    </div>
+                    <div>
+                        <h2 className="text-sm font-semibold uppercase text-white">Help center</h2>
+                        <a href="https://instagram.com/banksiacafe" className="text-gray-300 hover:underline text-sm">Instagram</a>
+                    </div>
+                </div>
+
+                <div className="flex flex-wrap justify-between items-center text-xs text-white">
+                    <span>
+                        &copy; {new Date().getFullYear()} <a href="https://google.com/" className="hover:underline">Banksia</a>. All Rights Reserved.
+                    </span>
+                    <span>
+                        <a href="mailto:info@banksiaoranpark.com.au" className="text-blue-300 hover:underline">info@banksiaoranpark.com.au</a>
+                    </span>
+                    <span>
+                        Developed and designed by <a href="https://matteomekhail.dev" className="text-blue-300 hover:underline">Matteo Mekhail</a>.
+                    </span>
                 </div>
             </div>
         </footer>
