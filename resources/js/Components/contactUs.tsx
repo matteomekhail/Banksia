@@ -129,7 +129,7 @@ export function ContactForm() {
                     <DialogHeader>
                         <DialogTitle>Message Sent Successfully</DialogTitle>
                         <DialogDescription>
-                            Thank you for contacting us. We will get back to you soon.
+                            Thank you for contacting Banksia. We will get back to you soon.
                         </DialogDescription>
                     </DialogHeader>
                     <Button onClick={() => setShowConfirmation(false)} className="bg-[#43534A] text-gray-50 hover:bg-[#43534A]/90">
