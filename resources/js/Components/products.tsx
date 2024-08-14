@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const MenuSection = () => {
     const menuItems = [
-        { title: 'Coffe',description:'Explore our exclusive selection of richly roasted coffees, each sip a promise of unmatched flavor and aroma', image: '/img/Immagine senza sfondo.png' },
+        { title: 'Coffee',description:'Explore our exclusive selection of richly roasted coffees, each sip a promise of unmatched flavor and aroma', image: '/img/Immagine senza sfondo.png' },
         { title: "Milkshake, Frappe's and Blend", description:'Refresh with our premium milkshakes, frappes, and blends, crafted from high-quality ingredients and fresh fruits.', image: '/img/Milkshake.png' },
         { title: 'Dessert & Sweets',description:'Indulge in our delightful range of desserts and sweets, from classic crepes to innovative treats.', image: '/img/Crepe.png' },
         { title: 'Breakfast, Lunch & Dinner',description:'Discover our full menu, from energizing breakfasts to exquisite dinners, all made with fresh, local ingredients.', image: '/img/meal.png' },
