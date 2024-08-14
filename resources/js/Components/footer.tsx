@@ -3,7 +3,6 @@
  * @see https://v0.dev/t/vBdiUutMnVe
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import Link from "next/link"
 
 export default function Footer() {
     return (
@@ -21,7 +20,7 @@ export default function Footer() {
 
                 <div className="flex flex-wrap justify-between items-center text-xs text-white">
                     <span>
-                        &copy; {new Date().getFullYear()} <a href="https://google.com/" className="hover:underline">Banksia</a>. All Rights Reserved.
+                        &copy; {new Date().getFullYear()} <a href="https://banksiaoranpark.com.au" className="hover:underline">Banksia</a>. All Rights Reserved.
                     </span>
                     <span>
                         <a href="mailto:info@banksiaoranpark.com.au" className="text-blue-300 hover:underline">info@banksiaoranpark.com.au</a>

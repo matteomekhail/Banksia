@@ -10,6 +10,7 @@ import { Textarea } from './ui/textarea'
 import { toast } from './ui/use-toast'
 import { Loader2 } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
+import { Inertia } from '@inertiajs/inertia'
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -39,8 +40,10 @@ export function ContactForm() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true)
         try {
-            // Simulating email sending
-            await new Promise(resolve => setTimeout(resolve, 2000))
+            await Inertia.post('/send-email', values, {
+                preserveState: true,
+                preserveScroll: true,
+            })
 
             setShowConfirmation(true)
             form.reset()
@@ -125,7 +128,7 @@ export function ContactForm() {
             </Card>
 
             <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
-                <DialogContent>
+                <DialogContent className="bg-[#FFF5EA]">
                     <DialogHeader>
                         <DialogTitle>Message Sent Successfully</DialogTitle>
                         <DialogDescription>

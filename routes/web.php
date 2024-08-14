@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -18,7 +18,7 @@ Route::get('/menu', function () {
     return Inertia::render('Menu');
 });
 
-Route::post('/send-email', [EmailController::class, 'sendEmail']);
+Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
 
 
 require __DIR__.'/auth.php';
