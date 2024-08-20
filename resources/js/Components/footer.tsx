@@ -26,7 +26,7 @@ export default function Footer() {
                         <a href="mailto:info@banksiaoranpark.com.au" className="text-blue-300 hover:underline">info@banksiaoranpark.com.au</a>
                     </span>
                     <span>
-                        Developed and designed by <a href="https://matteomekhail.dev" className="text-blue-300 hover:underline">Matteo Mekhail</a>.
+                        Developed and designed by <a href="https://stagetwolab.com" className="bg-clip-text text-transparent bg-gradient-to-r from-[#e85f4b] to-[#3a8f87] hover:underline">StageTwo Lab</a>.
                     </span>
                 </div>
             </div>
