@@ -58,9 +58,9 @@ function Hero() {
                         transition={{ duration: 0.5 }}
                     >
                         <motion.img
-                            src="/img/pancake definitivi.png"
+                            src="/img/Fontain2.png"
                             alt="Delicious pancakes"
-                            className="w-auto h-1/2 object-fill"
+                            className="w-4/6 h-1/2"
                             transition={{ type: "spring", stiffness: 300 }}
                         />
                     </motion.div>
