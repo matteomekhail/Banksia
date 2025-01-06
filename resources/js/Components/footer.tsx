@@ -14,7 +14,17 @@ export default function Footer() {
                     </div>
                     <div>
                         <h2 className="text-sm font-semibold uppercase text-white">Help center</h2>
-                        <a href="https://instagram.com/banksiacafe" className="text-gray-300 hover:underline text-sm">Instagram</a>
+                        <div className="flex flex-col space-y-1">
+                            <a href="tel:0282013159" className="text-gray-300 hover:underline text-sm">
+                                02 8201 3159
+                            </a>
+                            <a href="mailto:info@banksiaoranpark.com.au" className="text-gray-300 hover:underline text-sm">
+                                info@banksiaoranpark.com.au
+                            </a>
+                            <a href="https://instagram.com/banksiacafe" className="text-gray-300 hover:underline text-sm">
+                                Instagram
+                            </a>
+                        </div>
                     </div>
                 </div>
 

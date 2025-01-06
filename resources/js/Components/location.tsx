@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
-import { MapPin, Clock } from 'lucide-react';
+import { MapPin, Clock, Phone } from 'lucide-react';
 
 const locations = [
     { name: 'ORAN PARK', address: '351 Oran Park Drive, Oran Park NSW 2570' }
@@ -67,6 +67,19 @@ const LocationSection = () => {
                                         </div>
                                     </motion.div>
                                 ))}
+                                <motion.div
+                                    className="flex items-start justify-center md:justify-start space-x-2"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.7 }}
+                                >
+                                    <Phone className="text-[#43534A] mt-1 flex-shrink-0" />
+                                    <div>
+                                        <a href="tel:0282013159" className="text-gray-600 hover:text-[#43534A]">
+                                            02 8201 3159
+                                        </a>
+                                    </div>
+                                </motion.div>
                             </div>
                         </div>
                         <motion.div
