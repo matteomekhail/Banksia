@@ -55,6 +55,13 @@ export default function Book() {
     const [availabilityMessages, setAvailabilityMessages] = useState<{[key: string]: string}>({});
     const [checkingAvailability, setCheckingAvailability] = useState(false);
 
+    // Helper function to format date without timezone issues
+    const formatDateToString = (date: Date): string => {
+        return date.getFullYear() + '-' +
+            String(date.getMonth() + 1).padStart(2, '0') + '-' +
+            String(date.getDate()).padStart(2, '0');
+    };
+
     // Funzione per caricare i giorni festivi
     useEffect(() => {
         const fetchHolidays = async () => {
@@ -124,7 +131,7 @@ export default function Book() {
     // Check availability when date, time, or guests changes
     useEffect(() => {
         if (formData.date && formData.time && formData.guests) {
-            const dateString = formData.date.toISOString().split('T')[0];
+            const dateString = formatDateToString(formData.date);
             checkAvailability(dateString, formData.time, formData.guests);
         }
     }, [formData.date, formData.time, formData.guests]);
@@ -183,7 +190,8 @@ export default function Book() {
             return;
         }
 
-        const dateString = formData.date.toISOString().split('T')[0];
+        // Format date to YYYY-MM-DD without timezone conversion issues
+        const dateString = formatDateToString(formData.date);
         const key = `${dateString}-${formData.time}-${formData.guests}`;
 
         // Check if we know this slot is unavailable
@@ -228,7 +236,7 @@ export default function Book() {
     const getCurrentAvailabilityStatus = () => {
         if (!formData.date || !formData.time || !formData.guests) return null;
 
-        const dateString = formData.date.toISOString().split('T')[0];
+        const dateString = formatDateToString(formData.date);
         const key = `${dateString}-${formData.time}-${formData.guests}`;
 
         if (checkingAvailability) {
@@ -309,6 +317,13 @@ export default function Book() {
         </div>
     ));
 
+    // Get today's date at 00:00:00 to allow bookings for today
+    const getTodayAtMidnight = () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return today;
+    };
+
     return (
         <Layout>
             <Head title="Book Now" />
@@ -356,7 +371,7 @@ export default function Book() {
                                     <DatePicker
                                         selected={formData.date}
                                         onChange={handleDateChange}
-                                        minDate={new Date()}
+                                        minDate={getTodayAtMidnight()}
                                         dateFormat="dd/MM/yyyy"
                                         required
                                         locale="en-GB"

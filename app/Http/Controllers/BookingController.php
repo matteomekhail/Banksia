@@ -18,11 +18,34 @@ class BookingController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'date' => 'required|date|after_or_equal:today',
+            'date' => 'required|date',
             'time' => 'required|string',
             'guests' => 'required|integer|min:1|max:5',
             'special_requests' => 'nullable|string|max:1000'
         ]);
+
+        // Custom date validation - check if booking date is today or in the future
+        // Parse the date from the request and ensure it's in the app timezone
+        $bookingDate = Carbon::parse($request->date)->setTimezone(config('app.timezone'))->startOfDay();
+        $today = Carbon::today(config('app.timezone'));
+
+        // Debug logging
+        \Log::info('Date validation debug', [
+            'request_date' => $request->date,
+            'booking_date' => $bookingDate->toDateTimeString(),
+            'today' => $today->toDateTimeString(),
+            'booking_date_format' => $bookingDate->format('Y-m-d'),
+            'today_format' => $today->format('Y-m-d'),
+            'is_less_than' => $bookingDate->lt($today),
+            'app_timezone' => config('app.timezone')
+        ]);
+
+        // Use Carbon date comparison instead of string comparison for better timezone handling
+        if ($bookingDate->lt($today)) {
+            return redirect()->back()
+                ->withErrors(['date' => 'The booking date must be today or in the future.'])
+                ->withInput();
+        }
 
         // Controlla disponibilità - calcola il totale di ospiti per questo slot orario
         $existingBookingsTotal = Booking::forDate($request->date)
