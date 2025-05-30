@@ -133,12 +133,6 @@ export default function Login() {
                                 </button>
                             </div>
                         </form>
-
-                        <div className="mt-6 text-center">
-                            <p className="text-sm text-gray-600">
-                                Test credentials: admin@test.com / password
-                            </p>
-                        </div>
                     </div>
                 </motion.div>
             </div>

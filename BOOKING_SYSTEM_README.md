@@ -1,152 +1,195 @@
-# Banksia Booking System - Implementazione Completa
+# Banksia Booking System - Complete Implementation
 
-## 🎉 Sistema Implementato con Successo!
+## 🎉 System Successfully Implemented!
 
-Ho implementato completamente il sistema di booking per il ristorante Banksia con tutte le funzionalità richieste:
+I have completely implemented the booking system for Banksia restaurant with all requested features:
 
-### ✅ Funzionalità Implementate
+### ✅ Implemented Features
 
-#### 1. **Sistema di Email Automatiche**
-- ✅ Email di conferma per l'utente con dettagli del booking
-- ✅ Email di notifica per l'admin (info@banksiaoranpark.com.au)
-- ✅ Template email personalizzati e professionali
-- ✅ Configurazione con Resend API
+#### 1. **Automated Email System**
+- ✅ Confirmation email for user with booking details
+- ✅ Notification email for admin (info@banksiaoranpark.com.au)
+- ✅ Personalized and professional email templates
+- ✅ Configuration with Resend API
 
-#### 2. **Toast/Alert di Conferma**
-- ✅ Toast di successo quando il booking viene inviato
-- ✅ Toast di errore per problemi di validazione
-- ✅ Feedback visivo per disponibilità slot temporali
-- ✅ Messaggi di conferma per tutte le azioni admin
+#### 2. **Toast/Alert Confirmations**
+- ✅ Success toast when booking is submitted
+- ✅ Error toast for validation issues
+- ✅ Visual feedback for time slot availability
+- ✅ Confirmation messages for all admin actions
 
-#### 3. **Admin Dashboard Completa**
-- ✅ Pagina di login per admin
-- ✅ Dashboard con lista di tutti i booking
-- ✅ Statistiche in tempo reale (totali, pending, confirmed, cancelled)
-- ✅ Pagina di dettaglio per ogni booking
-- ✅ Azioni per confermare/cancellare/eliminare booking
-- ✅ Paginazione per gestire molti booking
-- ✅ Design responsive e moderno
+#### 3. **Complete Admin Dashboard**
+- ✅ Admin login page
+- ✅ Dashboard with list of all bookings
+- ✅ Real-time statistics (totals, pending, confirmed, cancelled)
+- ✅ Detail page for each booking
+- ✅ Actions to confirm/cancel/delete bookings
+- ✅ Pagination to manage many bookings
+- ✅ Responsive and modern design
 
-## 🚀 Come Testare il Sistema
+## 🚀 How to Setup and Test the System
 
-### 1. **Accesso Admin**
+### 1. **Create Admin Account**
+To create your real admin account, run:
+```bash
+php artisan admin:create
+```
+Follow the prompts to enter:
+- Admin name
+- Admin email  
+- Admin password
+
+### 2. **Remove Test Admin (Optional)**
+To remove the test admin account:
+```bash
+php artisan admin:remove-test
+```
+
+### 3. **List All Admins**
+To see all existing admin accounts:
+```bash
+php artisan admin:list
+```
+
+### 4. **Admin Access**
 ```
 URL: http://localhost:8000/login
-Email: admin@test.com
-Password: password
+Use the credentials you created above
 ```
 
-### 2. **Testare il Booking**
-1. Vai su: `http://localhost:8000/book`
-2. Compila il form di booking
-3. Verifica che ricevi il toast di conferma
-4. Controlla i log per le email (configurato su log driver)
+### 5. **Test Booking**
+1. Go to: `http://localhost:8000/book`
+2. Fill out the booking form
+3. Verify you receive the confirmation toast
+4. Check logs for emails (configured on log driver)
 
-### 3. **Admin Dashboard**
-1. Fai login come admin
-2. Vai su: `http://localhost:8000/admin/bookings`
-3. Visualizza tutti i booking
-4. Clicca su "View" per vedere i dettagli
-5. Testa le azioni di conferma/cancellazione
+### 6. **Admin Dashboard**
+1. Login as admin
+2. Go to: `http://localhost:8000/admin/bookings`
+3. View all bookings
+4. Click "View" to see details
+5. Test confirm/cancel actions
 
-### 4. **Controllo Email**
-Le email sono configurate per essere salvate nei log. Per vedere le email:
+### 7. **Email Check**
+Emails are configured to be saved in logs. To see emails:
 ```bash
 tail -f storage/logs/laravel.log
 ```
 
-## 📁 File Creati/Modificati
+## 📁 Created/Modified Files
 
 ### Backend (Laravel)
-- `app/Models/Booking.php` - Modello per i booking
-- `app/Http/Controllers/BookingController.php` - Controller principale
-- `app/Mail/BookingConfirmationUser.php` - Email per utente
-- `app/Mail/BookingConfirmationAdmin.php` - Email per admin
-- `database/migrations/2025_05_30_012723_create_bookings_table.php` - Tabella database
-- `database/seeders/AdminUserSeeder.php` - Utenti admin
-- `database/seeders/BookingSeeder.php` - Booking di test
+- `app/Models/Booking.php` - Booking model
+- `app/Http/Controllers/BookingController.php` - Main controller
+- `app/Mail/BookingConfirmationUser.php` - User email
+- `app/Mail/BookingConfirmationAdmin.php` - Admin email
+- `database/migrations/2025_05_30_012723_create_bookings_table.php` - Database table
+- `database/seeders/AdminUserSeeder.php` - Admin users
+- `database/seeders/BookingSeeder.php` - Test bookings
 
 ### Frontend (React/TypeScript)
-- `resources/js/Pages/Admin/Bookings/Index.tsx` - Lista booking admin
-- `resources/js/Pages/Admin/Bookings/Show.tsx` - Dettaglio booking
-- `resources/js/Pages/Auth/Login.tsx` - Pagina login admin
-- `resources/js/Components/layout.tsx` - Layout aggiornato con auth
+- `resources/js/Pages/Admin/Bookings/Index.tsx` - Admin booking list
+- `resources/js/Pages/Admin/Bookings/Show.tsx` - Booking detail
+- `resources/js/Pages/Auth/Login.tsx` - Admin login page
+- `resources/js/Components/layout.tsx` - Updated layout with auth
 
 ### Email Templates
 - `resources/views/emails/booking-confirmation-user.blade.php`
 - `resources/views/emails/booking-confirmation-admin.blade.php`
 
 ### Routes
-- `routes/web.php` - Tutte le nuove route aggiunte
+- `routes/web.php` - All new routes added
 
-## 🔧 Configurazione Email
+## 🔧 Email Configuration
 
-Il sistema è configurato per usare Resend (già configurato nel .env):
+The system is configured to use Resend (already configured in .env):
 ```env
 RESEND_API_KEY="re_NjypyTUt_BesJ7HABLoZYNAQo3Vc9WdPU"
 ```
 
-Per testare in produzione, cambia in `.env`:
+To test in production, change in `.env`:
 ```env
 MAIL_MAILER=resend
 ```
 
+## 👥 Admin Management Commands
+
+The system includes several commands for managing admin users:
+
+| Command | Description |
+|---------|-------------|
+| `php artisan admin:create` | Create a new admin user (interactive) |
+| `php artisan admin:list` | List all existing admin users |
+| `php artisan admin:remove-test` | Remove the test admin user |
+
+### Usage Examples:
+```bash
+# Create new admin
+php artisan admin:create
+
+# List all admins  
+php artisan admin:list
+
+# Remove test admin
+php artisan admin:remove-test
+```
+
 ## 📊 Database
 
-### Tabella Bookings
-- `id` - ID univoco
-- `name` - Nome cliente
-- `email` - Email cliente
-- `date` - Data prenotazione
-- `time` - Orario prenotazione
-- `guests` - Numero ospiti
-- `special_requests` - Richieste speciali
-- `status` - Stato (pending/confirmed/cancelled)
-- `confirmed_at` - Data conferma
-- `created_at/updated_at` - Timestamp
+### Bookings Table
+- `id` - Unique ID
+- `name` - Customer name
+- `email` - Customer email
+- `date` - Booking date
+- `time` - Booking time
+- `guests` - Number of guests
+- `special_requests` - Special requests
+- `status` - Status (pending/confirmed/cancelled)
+- `confirmed_at` - Confirmation date
+- `created_at/updated_at` - Timestamps
 
-## 🎨 Caratteristiche UI/UX
+## 🎨 UI/UX Features
 
 ### Frontend Booking
-- ✅ Controllo disponibilità in tempo reale
-- ✅ Validazione form completa
-- ✅ Feedback visivo per ogni azione
-- ✅ Design coerente con il sito esistente
+- ✅ Real-time availability check
+- ✅ Complete form validation
+- ✅ Visual feedback for every action
+- ✅ Design consistent with existing website
 
 ### Admin Dashboard
-- ✅ Design moderno e professionale
-- ✅ Statistiche in tempo reale
-- ✅ Tabella responsive con azioni
-- ✅ Paginazione automatica
-- ✅ Colori di stato intuitivi
-- ✅ Conferme per azioni distruttive
+- ✅ Modern and professional design
+- ✅ Real-time statistics
+- ✅ Responsive table with actions
+- ✅ Automatic pagination
+- ✅ Intuitive status colors
+- ✅ Confirmations for destructive actions
 
-## 🔐 Sicurezza
+## 🔐 Security
 
-- ✅ Autenticazione richiesta per admin
-- ✅ Validazione completa dei dati
-- ✅ Protezione CSRF
-- ✅ Sanitizzazione input
-- ✅ Controllo disponibilità slot
+- ✅ Authentication required for admin
+- ✅ Complete data validation
+- ✅ CSRF protection
+- ✅ Input sanitization
+- ✅ Slot availability control
 
 ## 📱 Responsive Design
 
-Il sistema è completamente responsive e funziona su:
+The system is completely responsive and works on:
 - ✅ Desktop
 - ✅ Tablet
 - ✅ Mobile
 
-## 🚀 Pronto per la Produzione
+## 🚀 Production Ready
 
-Il sistema è completamente funzionale e pronto per essere utilizzato in produzione. Tutte le funzionalità richieste sono state implementate con best practices di sviluppo.
+The system is fully functional and ready to be used in production. All requested features have been implemented with development best practices.
 
-### Prossimi Passi Opzionali
-- Integrazione Google Calendar (API già configurata)
-- Notifiche push
-- Export booking in CSV/PDF
-- Sistema di reminder automatici
-- Dashboard analytics avanzate
+### Optional Next Steps
+- Google Calendar integration (API already configured)
+- Push notifications
+- Export bookings to CSV/PDF
+- Automatic reminder system
+- Advanced analytics dashboard
 
 ---
 
-**Il sistema di booking è ora completamente operativo! 🎉** 
+**The booking system is now fully operational! 🎉** 
