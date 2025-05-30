@@ -92,9 +92,9 @@ const LocationSection = () => {
                                 <Clock className="text-[#43534A] flex-shrink-0" />
                                 <h3 className="text-lg font-semibold text-[#43534A]">Hours</h3>
                             </div>
-                            <p className="text-gray-600">Monday - Wednesday: 5:30 AM – 4 PM</p>
-                            <p className="text-gray-600">Thursday - Saturday: 5:30 AM – 9 PM</p>
-                            <p className="text-gray-600">Sunday: 6:30 AM – 5 PM</p>
+                            <p className="text-gray-600">Monday - Wednesday: 6:00 AM – 4 PM</p>
+                            <p className="text-gray-600">Thursday - Saturday: 6:00 AM – 9 PM</p>
+                            <p className="text-gray-600">Sunday: 7:00 AM – 5 PM</p>
                         </motion.div>
                         <motion.div
                             className="w-full flex justify-center md:justify-start"
