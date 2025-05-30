@@ -17,3 +17,17 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# OAuth credentials and sensitive files
+OAuth Client ID JSON - Bookings.json
+*oauth*.json
+*credential*.json
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

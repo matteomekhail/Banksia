@@ -26,6 +26,8 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@floating-ui/dom": "^1.6.13",
+        "@floating-ui/react-dom": "^2.1.2",
         "@hookform/resolvers": "^3.9.0",
         "@inertiajs/inertia": "^0.11.1",
         "@radix-ui/react-dialog": "^1.1.1",
@@ -45,6 +47,7 @@
         "@types/three": "^0.164.0",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
+        "date-fns": "^4.1.0",
         "eval": "^0.1.8",
         "framer-motion": "^11.3.23",
         "lucide-react": "^0.378.0",
@@ -52,6 +55,8 @@
         "patch-package": "^8.0.0",
         "postinstall-postinstall": "^2.1.0",
         "process": "^0.11.10",
+        "react-datepicker": "^7.6.0",
+        "react-day-picker": "^9.5.0",
         "react-hook-form": "^7.52.2",
         "react-hook-form-resolvers": "^0.0.1",
         "react-icons": "^5.2.1",

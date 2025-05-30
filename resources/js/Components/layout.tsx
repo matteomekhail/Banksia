@@ -1,17 +1,42 @@
 // components/Layout.tsx
 import React, { useState } from 'react';
 import { Menu, HoveredLink } from './ui/navbar-menu';
-import { FaInstagram } from 'react-icons/fa';
+import { FaInstagram, FaPhone, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import { HiMenu } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from './footer';
 import { SparklesCore } from './ui/sparkles';
+import { Toaster } from "@/Components/ui/toastert";
+import { usePage } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
+
+interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+
+interface PageProps {
+    auth?: {
+        user?: User;
+    };
+    [key: string]: any;
+}
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const [active, setActive] = useState<string | null>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+    const { auth } = usePage<PageProps>().props;
+    const user = auth?.user;
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+    const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
+
+    const handleLogout = () => {
+        router.post('/logout');
+    };
 
     const menuVariants = {
         closed: {
@@ -49,7 +74,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     {/* Menu e Contact us (visibili su desktop, nascosti su mobile) */}
                     <div className="hidden md:flex space-x-4 flex-1">
                         <HoveredLink href="/menu">MENU</HoveredLink>
+                        <HoveredLink href="/book">BOOKINGS</HoveredLink>
                         <HoveredLink href="/contact">CONTACT US</HoveredLink>
+                        {user && (
+                            <HoveredLink href="/admin/bookings">ADMIN</HoveredLink>
+                        )}
                     </div>
 
                     {/* Logo Banksia (centrato) */}
@@ -59,11 +88,55 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         </a>
                     </div>
 
-                    {/* Icona Instagram e menu hamburger */}
+                    {/* Icona Instagram, user menu e menu hamburger */}
                     <div className='flex-1 flex justify-end items-center space-x-4 text-2xl'>
+                        <a href="tel:0401368578" className="hidden md:flex items-center text-white hover:text-gray-400">
+                            <FaPhone className="mr-2 text-sm" />
+                            <span className="text-sm">0401 368 578</span>
+                        </a>
                         <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                             <FaInstagram className="text-white text-2xl hover:text-gray-400" />
                         </a>
+
+                        {/* User menu (visibile solo se autenticato) */}
+                        {user && (
+                            <div className="relative hidden md:block">
+                                <button
+                                    onClick={toggleUserMenu}
+                                    className="flex items-center text-white hover:text-gray-400 text-sm"
+                                >
+                                    <FaUser className="mr-2" />
+                                    <span>{user.name}</span>
+                                </button>
+
+                                {isUserMenuOpen && (
+                                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                                        <a
+                                            href="/admin/bookings"
+                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        >
+                                            Admin Dashboard
+                                        </a>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        >
+                                            <FaSignOutAlt className="inline mr-2" />
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Login link (visibile solo se non autenticato) */}
+                        {!user && (
+                            <a href="/login" className="hidden md:flex items-center text-white hover:text-gray-400 text-sm">
+                                <FaUser className="mr-2" />
+                                <span>Login</span>
+                            </a>
+                        )}
+
                         {/* Menu hamburger (visibile solo su mobile) */}
                         <button className="md:hidden text-white" onClick={toggleMenu}>
                             <HiMenu className="text-2xl" />
@@ -84,7 +157,35 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 >
                     <div className="p-4 flex flex-col space-y-4">
                         <HoveredLink href="/menu" className="text-white">MENU</HoveredLink>
+                        <HoveredLink href="/book" className="text-white">BOOKINGS</HoveredLink>
                         <HoveredLink href="/contact" className="text-white">CONTACT US</HoveredLink>
+                        {user && (
+                            <HoveredLink href="/admin/bookings" className="text-white">ADMIN</HoveredLink>
+                        )}
+                        <a href="tel:0401368578" className="flex items-center text-white">
+                            <FaPhone className="mr-2 text-sm" />
+                            <span>0401 368 578</span>
+                        </a>
+                        {user ? (
+                            <div className="border-t border-gray-600 pt-4">
+                                <div className="text-white text-sm mb-2">
+                                    <FaUser className="inline mr-2" />
+                                    {user.name}
+                                </div>
+                                <button
+                                    onClick={handleLogout}
+                                    className="text-white text-sm hover:text-gray-400"
+                                >
+                                    <FaSignOutAlt className="inline mr-2" />
+                                    Logout
+                                </button>
+                            </div>
+                        ) : (
+                            <a href="/login" className="text-white">
+                                <FaUser className="inline mr-2" />
+                                Login
+                            </a>
+                        )}
                     </div>
                 </motion.div>
             </AnimatePresence>
@@ -92,6 +193,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <main className="flex-grow pt-14">
                 {children}
             </main>
+            <Toaster />
             <Footer />
 
         </div>
