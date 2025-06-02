@@ -90,9 +90,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
                     {/* Icona Instagram, user menu e menu hamburger */}
                     <div className='flex-1 flex justify-end items-center space-x-4 text-2xl'>
-                        <a href="tel:0401368578" className="hidden md:flex items-center text-white hover:text-gray-400">
+                        <a href="tel:02 8201 3159" className="hidden md:flex items-center text-white hover:text-gray-400">
                             <FaPhone className="mr-2 text-sm" />
-                            <span className="text-sm">0401 368 578</span>
+                            <span className="text-sm">02 8201 3159</span>
                         </a>
                         <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                             <FaInstagram className="text-white text-2xl hover:text-gray-400" />
@@ -162,9 +162,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         {user && (
                             <HoveredLink href="/admin/bookings" className="text-white">ADMIN</HoveredLink>
                         )}
-                        <a href="tel:0401368578" className="flex items-center text-white">
+                        <a href="tel:02 8201 3159" className="flex items-center text-white">
                             <FaPhone className="mr-2 text-sm" />
-                            <span>0401 368 578</span>
+                            <span>02 8201 3159</span>
                         </a>
                         {user ? (
                             <div className="border-t border-gray-600 pt-4">
