@@ -52,8 +52,33 @@ export default function BookingsIndex({ bookings }: Props) {
     const [currentWeek, setCurrentWeek] = useState(getInitialWeek());
     const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
 
-    // Time slots for the restaurant
-    const timeSlots = ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"];
+    // Function to get available time slots based on day of week
+    const getTimeSlotsForDay = (date: Date): string[] => {
+        const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+        // Define time slots for different scenarios
+        const lunchSlots = ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"];
+        const dinnerSlots = ["18:00", "18:30", "19:00", "19:30", "20:00"];
+
+        // Sunday (0), Monday (1), Tuesday (2), Wednesday (3): only lunch until 3pm
+        if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 2 || dayOfWeek === 3) {
+            return lunchSlots;
+        }
+
+        // Thursday (4), Friday (5), Saturday (6): lunch + dinner until 8pm
+        if (dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6) {
+            return [...lunchSlots, ...dinnerSlots];
+        }
+
+        // Fallback (shouldn't happen)
+        return lunchSlots;
+    };
+
+    // Time slots for the restaurant - now dynamic based on all possible slots
+    const allTimeSlots = [
+        "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
+        "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"
+    ];
 
     // Get start of current week (Monday)
     const getWeekStart = (date: Date) => {
@@ -321,7 +346,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                 </div>
 
                                 {/* Time slots and bookings */}
-                                {timeSlots.map((timeSlot) => (
+                                {allTimeSlots.map((timeSlot) => (
                                     <div key={timeSlot} className="grid grid-cols-8 border-b border-gray-200">
                                         {/* Time label */}
                                         <div className="p-3 bg-gray-50 border-r border-gray-200 text-center font-medium text-gray-700">
@@ -331,6 +356,8 @@ export default function BookingsIndex({ bookings }: Props) {
                                         {/* Day columns */}
                                         {weekData.map((day, dayIndex) => {
                                             const booking = getBookingForSlot(dayIndex, timeSlot);
+                                            const isTimeSlotAvailable = getTimeSlotsForDay(day.date).includes(timeSlot);
+
                                             return (
                                                 <div
                                                     key={dayIndex}
@@ -338,7 +365,11 @@ export default function BookingsIndex({ bookings }: Props) {
                                                         day.isToday ? 'bg-blue-50' : 'bg-white'
                                                     } hover:bg-gray-50 transition-colors`}
                                                 >
-                                                    {booking ? (
+                                                    {!isTimeSlotAvailable ? (
+                                                        <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs">
+                                                            Not available
+                                                        </div>
+                                                    ) : booking ? (
                                                         <div
                                                             onClick={() => setSelectedBooking(booking)}
                                                             className={`w-full h-full p-2 rounded-md border-l-4 cursor-pointer shadow-sm hover:shadow-md transition-all ${getStatusColor(booking.status)}`}

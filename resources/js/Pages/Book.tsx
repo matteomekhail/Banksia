@@ -40,8 +40,30 @@ const initialFormState = {
 };
 
 // Move static arrays outside component
-const TIME_SLOTS = ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"];
+// Remove the static TIME_SLOTS array and replace with dynamic function
 const GUEST_NUMBERS = [1, 2, 3, 4, 5];
+
+// Function to get available time slots based on day of week
+const getTimeSlotsForDay = (date: Date): string[] => {
+    const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+    // Define time slots for different scenarios
+    const lunchSlots = ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"];
+    const dinnerSlots = ["18:00", "18:30", "19:00", "19:30", "20:00"];
+
+    // Sunday (0), Monday (1), Tuesday (2), Wednesday (3): only lunch until 3pm
+    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 2 || dayOfWeek === 3) {
+        return lunchSlots;
+    }
+
+    // Thursday (4), Friday (5), Saturday (6): lunch + dinner until 8pm
+    if (dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6) {
+        return [...lunchSlots, ...dinnerSlots];
+    }
+
+    // Fallback (shouldn't happen)
+    return lunchSlots;
+};
 
 export default function Book() {
     const { toast } = useToast();
@@ -148,7 +170,22 @@ export default function Book() {
 
     // Memoize handlers
     const handleDateChange = React.useCallback((date: Date | null) => {
-        setFormData(prev => ({ ...prev, date }));
+        setFormData(prev => {
+            const newData = { ...prev, date };
+
+            // If a date is selected and we have a current time selection
+            if (date && prev.time) {
+                // Get available time slots for the new date
+                const availableSlots = getTimeSlotsForDay(date);
+
+                // If the current time is not available for the new date, reset it
+                if (!availableSlots.includes(prev.time)) {
+                    newData.time = '';
+                }
+            }
+
+            return newData;
+        });
     }, []);
 
     const handleChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -406,11 +443,16 @@ export default function Book() {
                                         name="time"
                                         value={formData.time}
                                         onChange={handleChange}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#43534A] focus:ring focus:ring-[#43534A] focus:ring-opacity-50 transition-colors"
+                                        disabled={!formData.date}
+                                        className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#43534A] focus:ring focus:ring-[#43534A] focus:ring-opacity-50 transition-colors ${
+                                            !formData.date ? 'bg-gray-100 cursor-not-allowed' : ''
+                                        }`}
                                         required
                                     >
-                                        <option value="">Select a time</option>
-                                        {TIME_SLOTS.map((time) => (
+                                        <option value="">
+                                            {!formData.date ? 'Please select a date first' : 'Select a time'}
+                                        </option>
+                                        {formData.date && getTimeSlotsForDay(formData.date).map((time) => (
                                             <option key={time} value={time}>{time}</option>
                                         ))}
                                     </select>

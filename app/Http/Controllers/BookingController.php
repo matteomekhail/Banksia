@@ -75,7 +75,10 @@ class BookingController extends Controller
         // Invia email di conferma
         try {
             Mail::to($request->email)->send(new BookingConfirmationUser($booking));
+
+            // Invia notifica admin a entrambi gli indirizzi
             Mail::to('info@banksiaoranpark.com.au')->send(new BookingConfirmationAdmin($booking));
+            Mail::to('christyg00@outlook.com')->send(new BookingConfirmationAdmin($booking));
         } catch (\Exception $e) {
             \Log::error('Failed to send booking confirmation emails: ' . $e->getMessage());
         }
