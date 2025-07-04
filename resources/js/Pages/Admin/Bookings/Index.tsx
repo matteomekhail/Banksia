@@ -56,28 +56,28 @@ export default function BookingsIndex({ bookings }: Props) {
     const getTimeSlotsForDay = (date: Date): string[] => {
         const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 
-        // Define time slots for different scenarios
-        const lunchSlots = ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"];
+        // Define time slots for different scenarios - starting from 9:00 AM
+        const morningSlots = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"];
         const dinnerSlots = ["18:00", "18:30", "19:00", "19:30", "20:00"];
 
-        // Sunday (0), Monday (1), Tuesday (2), Wednesday (3): only lunch until 3pm
+        // Sunday (0), Monday (1), Tuesday (2), Wednesday (3): only morning/lunch until 3pm
         if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 2 || dayOfWeek === 3) {
-            return lunchSlots;
+            return morningSlots;
         }
 
-        // Thursday (4), Friday (5), Saturday (6): lunch + dinner until 8pm
+        // Thursday (4), Friday (5), Saturday (6): morning/lunch + dinner until 8pm
         if (dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6) {
-            return [...lunchSlots, ...dinnerSlots];
+            return [...morningSlots, ...dinnerSlots];
         }
 
         // Fallback (shouldn't happen)
-        return lunchSlots;
+        return morningSlots;
     };
 
     // Time slots for the restaurant - now dynamic based on all possible slots
     const allTimeSlots = [
-        "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
-        "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"
+        "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
+        "18:00", "18:30", "19:00", "19:30", "20:00"
     ];
 
     // Get start of current week (Monday)
